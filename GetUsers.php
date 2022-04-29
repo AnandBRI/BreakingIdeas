@@ -1,0 +1,28 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "UnityBackend";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+echo "Connected Successfully , Active Users Details are here : ";
+
+$sql = "SELECT username, level FROM users";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+    echo "id: " . $row["username"]. " - level: " . $row["level"]. "<br>";
+  }
+} else {
+  echo "0 results";
+}
+$conn->close();
+
+?>
